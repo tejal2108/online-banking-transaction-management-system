@@ -1,77 +1,118 @@
-# Online Banking Transaction Management System
+# 🏦 Online Banking Transaction Management System
 
-A backend application for managing users, bank accounts, and financial transactions using Java and Spring Boot. The application provides secure REST APIs with JWT authentication and role-based authorization.
+> A secure **RESTful backend application** for managing customers, bank accounts, and financial transactions. The system provides **JWT-based authentication, role-based authorization, account management, and transaction processing**, with MySQL for persistent data storage. Built using a **layered architecture** with Spring Boot, Spring Security, JPA/Hibernate, and REST APIs.
 
-## Tech Stack
 
-* Java 17
-* Spring Boot
-* Spring Security & JWT
-* Spring Data JPA & Hibernate
-* MySQL
-* REST APIs
-* JUnit 5 & Mockito
-* Swagger/OpenAPI
-* Maven
-* Git & GitHub
+---
 
-## Features
+## 🛠️ Tech Stack
 
-* User registration and login with BCrypt password hashing
-* JWT-based authentication and role-based authorization
-* Savings and Current account management
-* Automatic account number generation
-* Deposit, withdrawal, and fund transfer
-* Transaction history and status tracking
-* Input validation and exception handling
-* Unit testing with JUnit 5 and Mockito
-* REST API documentation using Swagger/OpenAPI
+* **Language:** Java 17
+* **Framework:** Spring Boot
+* **Security:** Spring Security, JWT
+* **ORM:** Spring Data JPA, Hibernate
+* **Database:** MySQL
+* **Testing:** JUnit 5, Mockito
+* **API Documentation:** Swagger/OpenAPI
+* **Build Tool:** Maven
+* **Version Control:** Git, GitHub
 
-## Architecture
+---
 
-```text
-Client
-  ↓
-Controller
-  ↓
-Service
-  ↓
-Repository
-  ↓
-MySQL
-```
+## ✨ Features
 
-The application follows a layered architecture with separate DTO, Security, Configuration, and Exception Handling components.
+* 🔐 **JWT Authentication** & BCrypt password hashing
+* 👥 **Role-Based Authorization** for Customer & Admin
+* 🏦 **Account Management** — Savings & Current accounts
+* 💰 **Transaction Management** — Deposit, Withdrawal & Transfer
+* 📜 **Transaction History** & status tracking
+* ✅ Input validation & global exception handling
+* 🧪 Unit testing with **JUnit 5 & Mockito**
+* 📚 API documentation with **Swagger/OpenAPI**
 
-## Database
+---
 
-Main entities:
+## 🏗️ Architecture
 
 ```text
-User 1 ───── * Account
-Account 1 ── * Transaction
+                 ┌──────────────┐
+                 │    Client    │
+                 │   Postman    │
+                 └──────┬───────┘
+                        ↓
+                 ┌──────────────┐
+                 │  Controller  │
+                 └──────┬───────┘
+                        ↓
+                 ┌──────────────┐
+                 │   Service    │
+                 └──────┬───────┘
+                        ↓
+                 ┌──────────────┐
+                 │  Repository  │
+                 └──────┬───────┘
+                        ↓
+                 ┌──────────────┐
+                 │    MySQL     │
+                 └──────────────┘
 ```
 
-## API Endpoints
+---
 
-| Method | Endpoint                        | Description          |
+## 🗄️ Database Design
+
+```text
+User
+ │
+ │ 1
+ │
+ └────────── * Account
+                  │
+                  │ 1
+                  │
+                  └────────── * Transaction
+```
+
+**Entities:** `User` • `Account` • `Transaction`
+
+---
+
+## 🔗 REST APIs
+
+| Method | Endpoint                        | Purpose              |
 | ------ | ------------------------------- | -------------------- |
-| POST   | `/api/auth/register`            | Register user        |
-| POST   | `/api/auth/login`               | Login & generate JWT |
-| POST   | `/api/accounts`                 | Create account       |
-| GET    | `/api/accounts`                 | View user accounts   |
-| POST   | `/api/transactions/deposit`     | Deposit money        |
-| POST   | `/api/transactions/withdraw`    | Withdraw money       |
-| POST   | `/api/transactions/transfer`    | Transfer money       |
-| GET    | `/api/transactions/{accountId}` | Transaction history  |
+| `POST` | `/api/auth/register`            | Register user        |
+| `POST` | `/api/auth/login`               | Login & generate JWT |
+| `POST` | `/api/accounts`                 | Create account       |
+| `GET`  | `/api/accounts`                 | View user accounts   |
+| `POST` | `/api/transactions/deposit`     | Deposit money        |
+| `POST` | `/api/transactions/withdraw`    | Withdraw money       |
+| `POST` | `/api/transactions/transfer`    | Transfer funds       |
+| `GET`  | `/api/transactions/{accountId}` | Transaction history  |
 
-## Configuration
+---
 
-Create `application.properties` and configure your local MySQL database and JWT secret.
+## 🔒 Security
 
-Sensitive configuration files are excluded using `.gitignore`.
+Protected APIs require a JWT token:
 
-## How to Run
+```text
+Authorization: Bearer <JWT_TOKEN>
+```
+
+Passwords are securely stored using **BCrypt hashing**.
+
+---
+
+## 🚀 Run Locally
+
+### Prerequisites
+
+* Java 17+
+* Maven
+* MySQL
+
+### Setup
 
 ```bash
 git clone <repository-url>
@@ -80,8 +121,12 @@ mvn clean install
 mvn spring-boot:run
 ```
 
+Configure your local MySQL credentials and JWT secret in `application.properties`.
+
 The application runs on:
 
 ```text
 http://localhost:8080
 ```
+
+---
